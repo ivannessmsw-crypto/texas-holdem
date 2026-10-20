@@ -1,0 +1,4 @@
+'use strict';
+const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict'),path=require('node:path'),vm=require('node:vm');
+const root=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8'),source=html.match(/<script>([\s\S]*?)<\/script>/)[1],baseline=require('../tests/fixtures/offline-before.json');
+assert.equal(crypto.createHash('sha256').update(source).digest('hex'),baseline.inlineSHA256,'Existing solo code changed');assert(source.includes(fs.readFileSync(path.join(root,'engine/poker-engine.cjs'),'utf8')));new vm.Script(source);const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,new Set(ids).size);assert(ids.includes('open-online'));console.log('PASS: entire original solo bundle unchanged; exact server rule source; valid unique DOM IDs');

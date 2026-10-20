@@ -1,0 +1,21 @@
+HTTP/WS: two authenticated clients, duplicate intent, runout refresh, reconnect and cross-account filtering passed
+✔ phase 3/4: actual HTTP and WebSocket, two account sessions, reconnect, refresh and isolation (950.238084ms)
+✔ phase 2/3: PostgreSQL migration, transactional buy-in, idempotence and account isolation (668.236958ms)
+all-in visible board sequence: 0 -> 3 -> 4 -> 5 -> COMPLETE; settlement rollback and retry: passed
+✔ phase 2/3: three-way all-in, historical filtering, 3/1/1, replay, atomic settlement and recovery (588.973208ms)
+✔ phase 2: stale/expired intent, changed amount with same ID, timeout and seat reservation (610.258041ms)
+✔ phase 2: joining without ever opening WebSocket cannot retain chips/seat forever (564.668666ms)
+✔ phase 2: a gap older than the replay window returns a complete filtered snapshot (687.086209ms)
+✔ phase 1: existing seeded offline rules are identical across 256 complete hands (203.910584ms)
+✔ phase 1: crypto shuffle, no duplicate cards, private state restores all-in side pots (0.782084ms)
+✔ Supabase exchange verifies ordinary user through Auth; UUID, email, role, issuer and expiry are enforced; wallet initialization is idempotent (691.473875ms)
+✔ a successful Auth lookup alone cannot bypass token claims or email verification; outages never create wallets (480.296917ms)
+✔ friend rooms have private invitation metadata, strict 2–3 capacity and idempotent creation (469.104083ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6141.098584

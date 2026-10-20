@@ -1,0 +1,12 @@
+{
+  "hands": 10000,
+  "players": "2–9",
+  "seedStart": 1,
+  "scope": "pure rules with legal seeded policy; not NPC skill or 10,000 SQL room transactions",
+  "actions": 82253,
+  "allInHands": 8778,
+  "sidePotHands": 8408,
+  "failures": [],
+  "elapsedMs": 898,
+  "status": "passed"
+}

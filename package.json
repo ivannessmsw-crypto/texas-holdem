@@ -1,0 +1,29 @@
+{
+  "name": "midnight-poker-friends",
+  "version": "0.8.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server/main.cjs",
+    "dev": "node server/dev.cjs",
+    "migrate": "node server/migrate.cjs",
+    "test": "node --test --test-concurrency=1 server/tests/*.test.cjs",
+    "test:postgres": "node server/tests/run-postgres.cjs",
+    "test:browser": "node scripts/test-friends-browser.cjs",
+    "test:offline": "node scripts/check-offline.cjs",
+    "test:acceptance": "node server/tests/run-postgres.cjs --browser",
+    "test:simulation": "node scripts/simulate-rules.cjs 10000"
+  },
+  "dependencies": {
+    "pg": "8.23.1",
+    "ws": "8.22.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.10",
+    "embedded-postgres": "18.4.0-beta.17",
+    "playwright": "1.64.1"
+  },
+  "packageManager": "pnpm@11.25.0"
+}

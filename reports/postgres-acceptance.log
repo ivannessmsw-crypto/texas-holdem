@@ -1,0 +1,88 @@
+The files belonging to this database system will be owned by user "ivanhong".
+This user must also own the server process.
+The database cluster will be initialized with this locale configuration:
+  locale provider:   libc
+  LC_COLLATE:  C
+  LC_CTYPE:    C
+  LC_MESSAGES: en_US.UTF-8
+  LC_MONETARY: C
+  LC_NUMERIC:  C
+  LC_TIME:     C
+The default text search configuration will be set to "english".
+
+Data page checksums are enabled.
+
+fixing permissions on existing directory /var/folders/l5/8tfg8_x96bdb7n2m3xm3cnc00000gn/T/midnight-pg-Tz9VFO ... ok
+creating subdirectories ...
+ok
+selecting dynamic shared memory implementation ...
+posix
+selecting default "max_connections" ...
+100
+selecting default "shared_buffers" ...
+128MB
+selecting default time zone ...
+Asia/Hong_Kong
+creating configuration files ...
+ok
+running bootstrap script ...
+ok
+performing post-bootstrap initialization ...
+ok
+syncing data to disk ...
+ok
+
+Success. You can now start the database server using:
+
+    '/Users/ivanhong/Documents/ChatGPT/texas-pages/node_modules/.pnpm/@embedded-postgres+darwin-arm64@18.4.0-beta.17/node_modules/@embedded-postgres/darwin-arm64/native/bin/pg_ctl' -D /var/folders/l5/8tfg8_x96bdb7n2m3xm3cnc00000gn/T/midnight-pg-Tz9VFO -l logfile start
+
+2026-10-20 21:02:04.235 HKT [33545] LOG:  starting PostgreSQL 18.4 on x86_64-apple-darwin24.6.0, compiled by Apple clang version 17.0.0 (clang-1700.6.3.2), 64-bit
+2026-10-20 21:02:04.236 HKT [33545] LOG:  listening on IPv4 address "127.0.0.1", port 52227
+2026-10-20 21:02:04.236 HKT [33545] LOG:  listening on Unix socket "/var/folders/l5/8tfg8_x96bdb7n2m3xm3cnc00000gn/T/midnight-pg-Tz9VFO/.s.PGSQL.52227"
+2026-10-20 21:02:04.238 HKT [33551] LOG:  database system was shut down at 2026-10-20 21:02:04 HKT
+2026-10-20 21:02:04.239 HKT [33545] LOG:  database system is ready to accept connections
+HTTP/WS: two authenticated clients, duplicate intent, runout refresh, reconnect and cross-account filtering passed
+✔ phase 3/4: actual HTTP and WebSocket, two account sessions, reconnect, refresh and isolation (309.815875ms)
+Native process handoff: durable all-in, hidden cards, session restoration and exactly-once results passed
+✔ native PostgreSQL: process handoff during all-in runout resumes filtered state and settles exactly once (3843.848167ms)
+2026-10-20 21:02:18.656 HKT [33576] ERROR:  duplicate key value violates unique constraint "room_seats_user_id_key"
+2026-10-20 21:02:18.656 HKT [33576] DETAIL:  Key (user_id)=(8f3d4466-8d9b-4d83-ac4d-017e62af198f) already exists.
+2026-10-20 21:02:18.656 HKT [33576] STATEMENT:  INSERT INTO room_seats(room_id,seat,user_id,stack,reserved_until) VALUES($1,$2,$3,$4,$5)
+✔ phase 2/3: PostgreSQL migration, transactional buy-in, idempotence and account isolation (103.619292ms)
+all-in visible board sequence: 0 -> 3 -> 4 -> 5 -> COMPLETE; settlement rollback and retry: passed
+✔ phase 2/3: three-way all-in, historical filtering, 3/1/1, replay, atomic settlement and recovery (109.698041ms)
+✔ phase 2: stale/expired intent, changed amount with same ID, timeout and seat reservation (96.45775ms)
+✔ phase 2: joining without ever opening WebSocket cannot retain chips/seat forever (79.927958ms)
+✔ phase 2: a gap older than the replay window returns a complete filtered snapshot (183.058417ms)
+✔ phase 1: existing seeded offline rules are identical across 256 complete hands (199.394709ms)
+✔ phase 1: crypto shuffle, no duplicate cards, private state restores all-in side pots (0.796166ms)
+✔ Supabase exchange verifies ordinary user through Auth; UUID, email, role, issuer and expiry are enforced; wallet initialization is idempotent (94.43625ms)
+✔ a successful Auth lookup alone cannot bypass token claims or email verification; outages never create wallets (80.447958ms)
+✔ friend rooms have private invitation metadata, strict 2–3 capacity and idempotent creation (86.6135ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15403.907083
+PASS two independent official-SDK sessions exchange verified UUIDs; edited solo localStorage never changes online wallet
+PASS room code joins a 2-person room and both clients see only their own hole cards
+PASS two real browser all-in, Flop refresh, server runout and exactly one conserved settlement
+PASS every captured packet excludes deck, future cards and unrevealed opponent holes
+PASS network interruption and reconnect restore current authoritative sequence
+PASS cashout returns both balances through transactional server ledger
+PASS three actual browsers create 300 main / 300 side pot and return unmatched chips, with 850 conserved
+PASS 390px mobile layout, desktop screenshots and logout private-memory cleanup
+PASS delayed prior-account cookie response cannot replace the new account or survive logout
+PASS original solo homepage boots without script errors and its friend button opens this backend
+PASS friends browser: 10 checks; 90 captured packets; actualSupabaseAuth=false
+POSTGRES_TEST_EXIT=0
+2026-10-20 21:02:28.720 HKT [33545] LOG:  received fast shutdown request
+2026-10-20 21:02:28.721 HKT [33545] LOG:  aborting any active transactions
+2026-10-20 21:02:28.721 HKT [33545] LOG:  background worker "logical replication launcher" (PID 33555) exited with exit code 1
+2026-10-20 21:02:28.721 HKT [33549] LOG:  shutting down
+2026-10-20 21:02:28.722 HKT [33549] LOG:  checkpoint starting: shutdown immediate
+2026-10-20 21:02:28.757 HKT [33549] LOG:  checkpoint complete: wrote 387 buffers (2.4%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.015 s, sync=0.011 s, total=0.036 s; sync files=568, longest=0.001 s, average=0.001 s; distance=6101 kB, estimate=6101 kB; lsn=0/1D7C8D0, redo lsn=0/1D7C8D0
+2026-10-20 21:02:28.759 HKT [33545] LOG:  database system is shut down

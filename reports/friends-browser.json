@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "actualBrowser": true,
+  "actualSupabaseAuth": false,
+  "auth": "official SDK with controlled verified-user endpoint fixture",
+  "database": "native PostgreSQL",
+  "checks": [
+    {
+      "name": "two independent official-SDK sessions exchange verified UUIDs; edited solo localStorage never changes online wallet",
+      "status": "passed"
+    },
+    {
+      "name": "room code joins a 2-person room and both clients see only their own hole cards",
+      "status": "passed"
+    },
+    {
+      "name": "two real browser all-in, Flop refresh, server runout and exactly one conserved settlement",
+      "status": "passed"
+    },
+    {
+      "name": "every captured packet excludes deck, future cards and unrevealed opponent holes",
+      "status": "passed"
+    },
+    {
+      "name": "network interruption and reconnect restore current authoritative sequence",
+      "status": "passed"
+    },
+    {
+      "name": "cashout returns both balances through transactional server ledger",
+      "status": "passed"
+    },
+    {
+      "name": "three actual browsers create 300 main / 300 side pot and return unmatched chips, with 850 conserved",
+      "status": "passed"
+    },
+    {
+      "name": "390px mobile layout, desktop screenshots and logout private-memory cleanup",
+      "status": "passed"
+    },
+    {
+      "name": "delayed prior-account cookie response cannot replace the new account or survive logout",
+      "status": "passed"
+    },
+    {
+      "name": "original solo homepage boots without script errors and its friend button opens this backend",
+      "status": "passed"
+    }
+  ],
+  "wirePackets": 90,
+  "failures": [],
+  "browser": "156.0.8078.4",
+  "checksPassed": 10
+}

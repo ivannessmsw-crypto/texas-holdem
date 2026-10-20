@@ -1,0 +1,30 @@
+# Demo resources only. Review Render's current limits before provisioning.
+services:
+  - type: web
+    name: midnight-poker-friends
+    runtime: node
+    region: singapore
+    plan: free
+    autoDeployTrigger: 'off'
+    buildCommand: npx --yes pnpm@11.25.0 install --prod --frozen-lockfile --ignore-scripts
+    startCommand: node server/main.cjs
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: '24'
+      - key: DATABASE_URL
+        fromDatabase:
+          name: midnight-poker-db
+          property: connectionString
+# Public Supabase settings are read from the existing index.html.
+# RENDER_EXTERNAL_URL supplies the exact HTTPS origin automatically.
+databases:
+  - name: midnight-poker-db
+    region: singapore
+    plan: free
+    postgresMajorVersion: '18'
+    databaseName: midnight
+    user: midnight_backend
+    ipAllowList: []

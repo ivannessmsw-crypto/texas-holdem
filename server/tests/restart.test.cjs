@@ -1,0 +1,22 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto'),net=require('node:net'),path=require('node:path'),{spawn}=require('node:child_process');
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function until(fn){const end=Date.now()+20000;while(Date.now()<end){const v=await fn();if(v)return v;await wait(40)}throw Error('Timed out waiting for native server state')}
+async function port(){const s=net.createServer();await new Promise(r=>s.listen(0,'127.0.0.1',r));const p=s.address().port;await new Promise(r=>s.close(r));return p}
+test('native PostgreSQL: process handoff during all-in runout resumes filtered state and settles exactly once',{skip:!process.env.TEST_DATABASE_URL},async t=>{
+ const {Pool}=require('pg'),pool=new Pool({connectionString:process.env.TEST_DATABASE_URL,options:'-c search_path=midnight_online,pg_catalog'}),children=[];t.after(async()=>{for(const p of children)if(p.exitCode===null&&p.signalCode===null){p.kill('SIGTERM');await Promise.race([new Promise(r=>p.once('exit',r)),wait(10000).then(()=>p.kill('SIGKILL'))])}await pool.end()});
+ async function start(){const p=await port(),base='http://127.0.0.1:'+p;let output='';const child=spawn(process.execPath,[path.join(__dirname,'../main.cjs')],{env:{...process.env,DATABASE_URL:process.env.TEST_DATABASE_URL,PORT:String(p),PUBLIC_ORIGIN:base,ALLOW_DEV_AUTH:'true',ALLOW_INSECURE_LOCALHOST:'true',NODE_ENV:'test'},stdio:['ignore','pipe','pipe']});child.stdout.on('data',s=>output+=s);child.stderr.on('data',s=>output+=s);children.push(child);await until(async()=>{if(child.exitCode!==null)throw Error(output);try{return(await fetch(base+'/healthz')).ok}catch{return false}});return {child,base,output:()=>output}}
+ let current=await start();const cookies=[];
+ async function request(route,data,cookie){const r=await fetch(current.base+route,{method:data?'POST':'GET',headers:{Origin:current.base,...(data?{'Content-Type':'application/json'}:{}),...(cookie?{Cookie:cookie}:{})},body:data?JSON.stringify(data):undefined});const body=await r.json();assert(r.ok,JSON.stringify(body));return {body,cookie:r.headers.get('set-cookie')?.split(';')[0]}}
+ for(let i=0;i<2;i++){const data={username:'restart_'+i,password:'restart-test-password-'+i};await request('/api/register',data);cookies.push((await request('/api/login',data)).cookie)}
+ const room=(await request('/api/rooms',{actionId:crypto.randomUUID(),maxPlayers:2},cookies[0])).body;let seq=0,handId=null;
+ async function command(i,type,extra={}){const out=(await request('/api/rooms/'+room.roomId+'/commands',{type,handId,expectedSeq:seq,actionId:crypto.randomUUID(),...extra},cookies[i])).body;seq=out.acceptedSeq;handId=out.handId}
+ await command(0,'join',{buyIn:500});await command(1,'join',{buyIn:500});
+ // Presence is a WebSocket responsibility. Explicitly mark both test seats connected.
+ await pool.query("UPDATE rooms SET state=jsonb_set(jsonb_set(state,'{seats,0,reservedUntil}','null'),'{seats,1,reservedUntil}','null') WHERE id=$1",[room.roomId]);
+ await command(0,'start');await command(0,'action',{action:{type:'allin'}});await command(1,'action',{action:{type:'call'}});
+ const before=(await request('/api/rooms/'+room.roomId,null,cookies[0])).body;assert.equal(before.status,'PRESENTING');assert.equal(before.board.length,0);assert.equal(before.payout.length,0);
+ const previous=current;current=await start();await until(()=>previous.child.exitCode!==null||previous.child.signalCode!==null);assert.match(previous.output(),/Handing off/);
+ const recovered=(await request('/api/rooms/'+room.roomId,null,cookies[0])).body;assert.equal(recovered.handId,handId);assert(recovered.seq>=before.seq);if(recovered.status!=='COMPLETE'){assert.equal(recovered.players[1].cards.length,0);assert.equal(recovered.payout.length,0)}
+ const complete=await until(async()=>{const v=(await request('/api/rooms/'+room.roomId,null,cookies[0])).body;return v.status==='COMPLETE'&&v});assert.equal(complete.board.length,5);assert.equal(complete.players.reduce((s,p)=>s+p.stack,0),1000);assert.equal(Number((await pool.query('SELECT count(*) n FROM hand_results WHERE hand_id=$1',[handId])).rows[0].n),2);await wait(300);assert.equal(Number((await pool.query("SELECT count(*) n FROM chip_ledger WHERE hand_id=$1 AND reason='hand-settlement'",[handId])).rows[0].n),2);console.log('Native process handoff: durable all-in, hidden cards, session restoration and exactly-once results passed');
+});
