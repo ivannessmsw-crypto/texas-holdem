@@ -1,0 +1,13 @@
+{
+  "scope": "official SDK and real friend UI; all Auth calls intercepted; no real emails or password changes",
+  "checks": [
+    "resend success and cooldown",
+    "forgot success and cooldown",
+    "mail limit is shown without claiming delivery",
+    "expired confirmation callback explicitly reports failure",
+    "recovery callback, reload, matching passwords, isolated session, signout"
+  ],
+  "failures": [],
+  "status": "passed",
+  "checksPassed": 5
+}

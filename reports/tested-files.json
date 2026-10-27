@@ -1,7 +1,7 @@
 {
   "purpose": "SHA-256 of tested runtime/config/test files; excludes reports and private environment",
   "files": {
-    "assets/auth-feedback.js": "d74caa9b6cdd5c87780eabdeb6b4f7a0521aa3544003185bf5fa3d817399a848",
+    "assets/auth-feedback.js": "fede69245a97c941551c5c407110d6f9564c92e4c549f297913c935f8b6d9dd1",
     "assets/online-config.js": "75052116e4f30bd42758ee146569c718780ffe7f795c1ccfd6a3ab86dbc8ef8a",
     "assets/online-launch.js": "d3070802e413d7a58a0110510cc9ec66fcd21c1477e07ec73174f2a15b481988",
     "engine/poker-engine.cjs": "8954d0aefbc5f1d0d3a923663f15d6054eb1928db28e1db098cc03a6cfb0e316",
@@ -13,6 +13,7 @@
     "scripts/configure-online.cjs": "ac7d66812944e73274b4dbaf305f6462babba55f954fd4d2a1878ba0d7b74ce7",
     "scripts/simulate-rules.cjs": "ecde3df145d199f507a3c2100f20bc57910937089ea5466cbcc3d38e02e2c43e",
     "scripts/test-auth-feedback.cjs": "6342a4d9dfa8262a6f88ca85466952133f538c86edd7c09ff91480156498fc13",
+    "scripts/test-auth-recovery.cjs": "611a780c3cf7c49ffe871b4e5f2f654c3e34d31264929a68fb462ffa455c238f",
     "scripts/test-friends-browser.cjs": "b45415e795672b44786348c2ce00f2be7bdde3fe6f64e7d0bee76ec78af92f0b",
     "server/auth.cjs": "d24b674b228d12df93612976dd71c6d42273ece2687723539b32d4be1afb3f01",
     "server/authority.cjs": "708e06a20214fe424447a62722849b9b6c6761479285d2d4737ba43449d78753",
@@ -25,9 +26,9 @@
     "server/migrations/001_online.sql": "f567a522614a106e00022e18686515c95ceb40ac0b1836504b2c2b5a3c3948dd",
     "server/migrations/002_supabase_friends.sql": "10bf2b78988fda0873af78dc884300f4fc2e849d60a0be80e745fa29e0d2501f",
     "server/migrations/003_authority_instances.sql": "b5488a89a14c7ff7cb87acc3881131a9876096ac956b977d140ae6e4ac814365",
-    "server/public/index.html": "f79f97739f78dd59062fdd68ec176d450bd4715eb72e5aa92071a1c871ab5f97",
+    "server/public/index.html": "7a81b14a1b6ef01f4dbb0c09fef50a244e131ade6046b4158fc92c3d6436b59d",
     "server/public/online.css": "a218861d6b0983a77ec4fdf4f72c0d4f7c033a88336f212cd0ecb367d25770a8",
-    "server/public/online.js": "6922304867053995310d55c65167d487c995a9f37d8d3e0b764d8b22338a336d",
+    "server/public/online.js": "3abe28de7546180c0311e12a9b88857b32c0a1a633d7fba5da1420f784dbbaa9",
     "server/public/state.js": "97e3d978704bb142568e0b4e3f24d8a916ba0e366d95767df5a86c5ae660e6a7",
     "server/rooms.cjs": "e24b2051db5702e5e389a417107e45c27e1b7e7a3775e7d80ccd1587d1f9e643",
     "server/rules.cjs": "e050474388fc97985c07eba59d6bbddc2ddf0ad3ba5246ce98c17188e0cc9632",
@@ -40,11 +41,12 @@
     "server/tests/restart.test.cjs": "b3e74c53703cccee8a188a2b91ff9958d26a7d01ad10a6b478a42e56fe8ffe98",
     "server/tests/rooms.test.cjs": "2269e0ebc2c1573abd49970187b98e248157c38883bdb0e1d83d1d2c2e21e6ac",
     "server/tests/rules.test.cjs": "3afe8a33abfa369dd681087660662c66897559d9ad2ac7acd6f518be7d754a04",
-    "server/tests/run-postgres.cjs": "424ad6aa1dde4c768f046bbcf4ed095bd181c8a27b8dd38e72187725ad80be18",
+    "server/tests/run-postgres.cjs": "f4b1da65f691310242715ce1b44b5d4b4477b04e6a208ce7ccc0d1cdaffcfa16",
     "server/tests/supabase.test.cjs": "3b0aeed9aff98182925ab2cc4782c3e0d0e056671f1290b7fba3734481fefdcc",
     "tests/fixtures/auth-feedback-edits.json": "ab39a733ea9ec8495ca85317590bf571615d588359a24203c3f15d70d38028ca",
     "tests/fixtures/legacy-main-before-fencing.cjs": "8e1e34f0ab290496bd00b8d8fde3f536c925d27d3db785afc2227f7ce78845ec"
   },
   "deploymentConfigNote": "2026-10-27: live public origin configured; actual Render handoff failure fixed with persistent instance generations. Native PostgreSQL 12/12 and browser 10/10 passed; see render-handoff-tests.log.",
-  "authFeedbackNote": "2026-10-27: only the two audited Auth inline edits plus shared feedback asset changed; original solo source verified after reversing those exact edits. Native suite 14/14; friend browser 10/10; Auth UI 8/8. Supabase project restored via dashboard; actual signup/email still requires user verification."
+  "authFeedbackNote": "2026-10-27: only the two audited Auth inline edits plus shared feedback asset changed; original solo source verified after reversing those exact edits. Native suite 14/14; friend browser 10/10; Auth UI 8/8. Supabase project restored via dashboard; actual signup/email still requires user verification.",
+  "authRecoveryNote": "2026-10-27: native PostgreSQL suite 14/14, friend browser 10/10, Auth UI 8/8 and recovery 5/5. Official SDK uses intercepted test Auth; no real mail or password changed. Original solo inline code still matches audited baseline. See AUTH-RECOVERY-2026-10-27.md."
 }
