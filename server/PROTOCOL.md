@@ -66,7 +66,7 @@ Ack 不推進客戶端畫面序號。畫面只由 snapshot/event 更新。
 
 伺服器將私有引擎（含牌堆）、公開游標佇列、期限、收據與可見狀態存在 PostgreSQL。重啟從最後已提交狀態恢復；不重新洗牌。每次只推進一個到期展示事件，保留 Flop/Turn/River 間隔。
 
-目前只支援一個 active 權威服務程序。PostgreSQL advisory lock 防止雙寫；重新部署透過 LISTEN/NOTIFY 要求舊程序先排空在途工作、釋放鎖，再由新程序恢復。尚未實作多個 active 程序事件匯流排或跨區高可用。
+目前只支援一個 active 權威服務程序。PostgreSQL advisory lock 防止雙寫；重新部署透過帶有持久 instance 世代的 LISTEN/NOTIFY 要求舊程序先排空在途工作、釋放鎖，再由新程序恢復。Render 舊 instance 重啟時沿用舊世代，不可反向趕走新 leader；無世代的 legacy 通知不觸發交接。尚未實作多個 active 程序事件匯流排或跨區高可用。
 
 ## Supabase session 與邀請
 

@@ -1,6 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto'),{fixture}=require('./helpers.cjs'),{Rooms}=require('../rooms.cjs'),{Replica}=require('../public/state.js');
 test('phase 2/3: PostgreSQL migration, transactional buy-in, idempotence and account isolation',async t=>{
- const f=await fixture();t.after(f.close);await f.store.migrate();assert.equal((await f.pool.query('SELECT * FROM schema_migrations')).rows.length,2);
+ const f=await fixture();t.after(f.close);await f.store.migrate();assert.equal((await f.pool.query('SELECT * FROM schema_migrations')).rows.length,3);
  const initial=await f.state(),msg={type:'join',actionId:crypto.randomUUID(),handId:null,expectedSeq:initial.seq,buyIn:250},[a,b]=await Promise.all([f.rooms.command(f.id,f.users[0],msg),f.rooms.command(f.id,f.users[0],msg)]);assert.deepEqual(a.reply,b.reply);assert.equal(a.events.length+b.events.length,1);
  assert.equal(Number((await f.pool.query('SELECT balance FROM wallets WHERE user_id=$1',[f.users[0].id])).rows[0].balance),750);await assert.rejects(f.rooms.command(f.id,f.users[0],{...msg,buyIn:251}),/ACTION_ID_CONFLICT/);
  await assert.rejects(f.rooms.read(f.id,f.users[1]),/NOT_SEATED/);await assert.rejects(f.send(f.users[1],'action',{action:{type:'fold'}}),/NOT_SEATED/);

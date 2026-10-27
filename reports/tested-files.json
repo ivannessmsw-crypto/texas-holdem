@@ -11,16 +11,18 @@
     "scripts/check-offline.cjs": "feeef853e85fb4633e84f051dc12ecd5f7a0c6e32ba758bb3c633572d9d7f045",
     "scripts/configure-online.cjs": "ac7d66812944e73274b4dbaf305f6462babba55f954fd4d2a1878ba0d7b74ce7",
     "scripts/simulate-rules.cjs": "ecde3df145d199f507a3c2100f20bc57910937089ea5466cbcc3d38e02e2c43e",
-    "scripts/test-friends-browser.cjs": "ca77f5abb537baa86b8a21bd7e0574a73fdaa2f14cb7a3ec37d9f426fb7a4f5b",
+    "scripts/test-friends-browser.cjs": "b45415e795672b44786348c2ce00f2be7bdde3fe6f64e7d0bee76ec78af92f0b",
     "server/auth.cjs": "d24b674b228d12df93612976dd71c6d42273ece2687723539b32d4be1afb3f01",
+    "server/authority.cjs": "708e06a20214fe424447a62722849b9b6c6761479285d2d4737ba43449d78753",
     "server/config.cjs": "56c9755903cf4d61caab196b2a63041a9c5856f96f129c0c1eef2942425a318d",
     "server/database.cjs": "9d865b9287f88fa2aa4a6758f72756f3deba4cb977adfac36f3d01ec0dc11112",
     "server/dev.cjs": "bf51b949e09eba43ae5da0c90bd442bd24ed3b0d431035c8d91ef607fdee046e",
     "server/http.cjs": "fa83fa02d92fd572e2b1cc9ebe13d6ec5be18d3c0682d44c50489fce8afce23d",
-    "server/main.cjs": "fcb94ce51b7efcbe580a3877a51c7a4b4d06b375bc64158d00ef027d6f18b2f5",
+    "server/main.cjs": "ad96931c1a091b0005852868df181e2638d8d729299f22f2f10b8cd5e8ab99da",
     "server/migrate.cjs": "94616b3900c027d898ce2409d792f5fbbb74cd9e0a1eb306172a29e086ce6d9f",
     "server/migrations/001_online.sql": "f567a522614a106e00022e18686515c95ceb40ac0b1836504b2c2b5a3c3948dd",
     "server/migrations/002_supabase_friends.sql": "10bf2b78988fda0873af78dc884300f4fc2e849d60a0be80e745fa29e0d2501f",
+    "server/migrations/003_authority_instances.sql": "b5488a89a14c7ff7cb87acc3881131a9876096ac956b977d140ae6e4ac814365",
     "server/public/index.html": "bab38a57e547916f00a8fd567c297aec7e30a26fc39655995f0a2ce3e6b8559b",
     "server/public/online.css": "a218861d6b0983a77ec4fdf4f72c0d4f7c033a88336f212cd0ecb367d25770a8",
     "server/public/online.js": "7d99737be22a4ac23dd2109c49cfd0677bb003e8df852258db4231c025728299",
@@ -32,11 +34,12 @@
     "server/tests/fake-supabase.cjs": "069009f8d0813c23f760bb1eaad86989774c3bcb5b4f89fc42dca445911ed6c4",
     "server/tests/helpers.cjs": "958065f5d9b171b503ffc9612f8981968ac263ee87fc7340b65ef4b559eb2019",
     "server/tests/http.test.cjs": "3eba87fa1b329239c0f2661c41658d4573df9984876be06c27e236c1359c4414",
-    "server/tests/restart.test.cjs": "f94d7da2cc96fa0e56b7dd763df92bbead851650608d3aaa77824e3afd6113ba",
-    "server/tests/rooms.test.cjs": "9501c5f54348cb0b34cd7ee11f7dd265a0034f671000c6da4af07b285f91660a",
+    "server/tests/restart.test.cjs": "b3e74c53703cccee8a188a2b91ff9958d26a7d01ad10a6b478a42e56fe8ffe98",
+    "server/tests/rooms.test.cjs": "2269e0ebc2c1573abd49970187b98e248157c38883bdb0e1d83d1d2c2e21e6ac",
     "server/tests/rules.test.cjs": "3afe8a33abfa369dd681087660662c66897559d9ad2ac7acd6f518be7d754a04",
     "server/tests/run-postgres.cjs": "b859cd4f7066969c5277889ce674ea063706d0892723271d0e229bd210889b9c",
-    "server/tests/supabase.test.cjs": "3b0aeed9aff98182925ab2cc4782c3e0d0e056671f1290b7fba3734481fefdcc"
+    "server/tests/supabase.test.cjs": "3b0aeed9aff98182925ab2cc4782c3e0d0e056671f1290b7fba3734481fefdcc",
+    "tests/fixtures/legacy-main-before-fencing.cjs": "8e1e34f0ab290496bd00b8d8fde3f536c925d27d3db785afc2227f7ce78845ec"
   },
-  "deploymentConfigNote": "2026-10-27: public backend origin updated after successful Render health/login-page checks; other accepted runtime hashes unchanged."
+  "deploymentConfigNote": "2026-10-27: live public origin configured; actual Render handoff failure fixed with persistent instance generations. Native PostgreSQL 12/12 and browser 10/10 passed; see render-handoff-tests.log."
 }

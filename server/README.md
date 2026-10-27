@@ -16,7 +16,7 @@
 
 ## 資料模型與 migration
 
-正式連線固定使用 `midnight_online`，非 `public`。兩份 SQL 依序在交易與 advisory lock 中套用，已套用檔案校驗 checksum；再次啟動不會重建或重置資料。
+正式連線固定使用 `midnight_online`，非 `public`。三份 SQL 依序在交易與 advisory lock 中套用，已套用檔案校驗 checksum；再次啟動不會重建或重置資料。
 
 - `001_online.sql`：使用者、設定、錢包、session hash、房間、座位、私有牌局／事件、行動收據、結果、籌碼流水。
 - `002_supabase_friends.sql`：Supabase 顯示名稱與來源、房間碼、所有後端表 RLS 啟用與撤銷瀏覽器角色權限。
@@ -25,11 +25,13 @@
 
 買入、退桌、超時退回與結算都在鎖住房間的交易內，成功收據和資料同時提交。`hand_results(hand_id,user_id)`、流水 entry_id、行動收據的唯一限制防止重複寫入；同一交易失敗會全部 rollback。單機 `localStorage` 與 `solo_saves` 不會影響這些表。
 
+- `003_authority_instances.sql`：持久化程序世代，避免 Render 重啟舊 instance 後反向趕走新 leader。
+
 ## 時序與恢復
 
 規則可以在 All-in 時立即計算到終局，但房間的 visible、queue、nextAt 與私有規則一起持久化。公開事件逐次送出 Flop／Turn／River，最後才送結果並結算。任何 snapshot 都取 visible，不取私有終局。
 
-行動 30 秒，斷線保留 120 秒，公開街間隔 900ms、結果間隔 500ms。新程序向舊 authority 發 PostgreSQL 通知；舊程序停止接收操作、等在途工作與交易結束後釋放鎖，新程序再接手。若舊程序崩潰，資料庫連線關閉會釋放鎖。新程序從同一手與公開游標恢復，客戶端重連去重。每次只推進一個展示事件；伺服器停機期間不會讓客戶端仍然操作。
+行動 30 秒，斷線保留 120 秒，公開街間隔 900ms、結果間隔 500ms。新 instance 依 RENDER_INSTANCE_ID 註冊持久遞增世代，再向舊 authority 發帶世代的 PostgreSQL 通知。相同 instance 重啟沿用原世代；只有較新世代可要求交接，過時程序在取得鎖之前退出，舊協定隨機通知不會趕走新 leader。舊程序停止接收操作、等在途工作與交易結束後釋放鎖，新程序再接手。若舊程序崩潰，資料庫連線關閉會釋放鎖。新程序從同一手與公開游標恢復，客戶端重連去重。每次只推進一個展示事件；伺服器停機期間不會讓客戶端仍然操作。
 
 只支援單一 active authority，不能自行開啟多副本或跨區水平擴容。transaction pooler 不能保留 LISTEN 與 session advisory lock；使用 direct/session PostgreSQL 連線。
 
