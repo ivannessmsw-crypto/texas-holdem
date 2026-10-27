@@ -1,0 +1,92 @@
+The files belonging to this database system will be owned by user "ivanhong".
+This user must also own the server process.
+The database cluster will be initialized with this locale configuration:
+  locale provider:   libc
+  LC_COLLATE:  C
+  LC_CTYPE:    C
+  LC_MESSAGES: en_US.UTF-8
+  LC_MONETARY: C
+  LC_NUMERIC:  C
+LC_TIME:     C
+The default text search configuration will be set to "english".
+
+Data page checksums are enabled.
+
+fixing permissions on existing directory /var/folders/l5/8tfg8_x96bdb7n2m3xm3cnc00000gn/T/midnight-pg-HpyXay ...
+ok
+creating subdirectories ...
+ok
+selecting dynamic shared memory implementation ...
+posix
+selecting default "max_connections" ...
+100
+selecting default "shared_buffers" ...
+128MB
+selecting default time zone ...
+Asia/Hong_Kong
+creating configuration files ...
+ok
+running bootstrap script ...
+ok
+performing post-bootstrap initialization ...
+ok
+syncing data to disk ...
+ok
+
+Success. You can now start the database server using:
+
+    '/Users/ivanhong/Documents/ChatGPT/texas-pages/node_modules/.pnpm/@embedded-postgres+darwin-arm64@18.4.0-beta.17/node_modules/@embedded-postgres/darwin-arm64/native/bin/pg_ctl' -D /var/folders/l5/8tfg8_x96bdb7n2m3xm3cnc00000gn/T/midnight-pg-HpyXay -l logfile start
+
+2026-10-27 20:27:39.093 HKT [66215] LOG:  starting PostgreSQL 18.4 on x86_64-apple-darwin24.6.0, compiled by Apple clang version 17.0.0 (clang-1700.6.3.2), 64-bit
+2026-10-27 20:27:39.094 HKT [66215] LOG:  listening on IPv4 address "127.0.0.1", port 56196
+2026-10-27 20:27:39.094 HKT [66215] LOG:  listening on Unix socket "/var/folders/l5/8tfg8_x96bdb7n2m3xm3cnc00000gn/T/midnight-pg-HpyXay/.s.PGSQL.56196"
+2026-10-27 20:27:39.096 HKT [66221] LOG:  database system was shut down at 2026-10-27 20:27:39 HKT
+2026-10-27 20:27:39.097 HKT [66215] LOG:  database system is ready to accept connections
+✔ Auth feedback distinguishes service outages, mail restrictions, limits and credential errors (0.306875ms)
+✔ Auth diagnostics remain readable JSON with only allowed fields and redact private values (0.54675ms)
+HTTP/WS: two authenticated clients, duplicate intent, runout refresh, reconnect and cross-account filtering passed
+✔ phase 3/4: actual HTTP and WebSocket, two account sessions, reconnect, refresh and isolation (301.742542ms)
+Native process handoff: durable all-in, old-instance restart fencing, actual legacy upgrade/restart, session restoration and exactly-once results passed
+✔ native PostgreSQL: process handoff during all-in runout resumes filtered state and settles exactly once (4696.720667ms)
+2026-10-27 20:27:54.296 HKT [66253] ERROR:  duplicate key value violates unique constraint "room_seats_user_id_key"
+2026-10-27 20:27:54.296 HKT [66253] DETAIL:  Key (user_id)=(b52a2e92-f86a-4055-aba0-fe62427f8fe0) already exists.
+2026-10-27 20:27:54.296 HKT [66253] STATEMENT:  INSERT INTO room_seats(room_id,seat,user_id,stack,reserved_until) VALUES($1,$2,$3,$4,$5)
+✔ phase 2/3: PostgreSQL migration, transactional buy-in, idempotence and account isolation (111.56275ms)
+all-in visible board sequence: 0 -> 3 -> 4 -> 5 -> COMPLETE; settlement rollback and retry: passed
+✔ phase 2/3: three-way all-in, historical filtering, 3/1/1, replay, atomic settlement and recovery (117.718834ms)
+✔ phase 2: stale/expired intent, changed amount with same ID, timeout and seat reservation (104.755ms)
+✔ phase 2: joining without ever opening WebSocket cannot retain chips/seat forever (85.516542ms)
+✔ phase 2: a gap older than the replay window returns a complete filtered snapshot (171.279792ms)
+✔ phase 1: existing seeded offline rules are identical across 256 complete hands (218.998458ms)
+✔ phase 1: crypto shuffle, no duplicate cards, private state restores all-in side pots (0.781ms)
+✔ Supabase exchange verifies ordinary user through Auth; UUID, email, role, issuer and expiry are enforced; wallet initialization is idempotent (100.592167ms)
+✔ a successful Auth lookup alone cannot bypass token claims or email verification; outages never create wallets (85.635458ms)
+✔ friend rooms have private invitation metadata, strict 2–3 capacity and idempotent creation (89.9485ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16236.680375
+PASS two independent official-SDK sessions exchange verified UUIDs; edited solo localStorage never changes online wallet
+PASS room code joins a 2-person room and both clients see only their own hole cards
+PASS two real browser all-in, Flop refresh, server runout and exactly one conserved settlement
+PASS every captured packet excludes deck, future cards and unrevealed opponent holes
+PASS network interruption and reconnect restore current authoritative sequence
+PASS cashout returns both balances through transactional server ledger
+PASS three actual browsers create 300 main / 300 side pot and return unmatched chips, with 850 conserved
+PASS 390px mobile layout, desktop screenshots and logout private-memory cleanup
+PASS delayed prior-account cookie response cannot replace the new account or survive logout
+PASS original solo homepage boots without script errors and its friend button opens this backend
+PASS friends browser: 10 checks; 90 captured packets; actualSupabaseAuth=false
+PASS Auth UI: 8 checks, no real signups or emails
+POSTGRES_TEST_EXIT=0
+2026-10-27 20:28:05.226 HKT [66215] LOG:  received fast shutdown request
+2026-10-27 20:28:05.226 HKT [66215] LOG:  aborting any active transactions
+2026-10-27 20:28:05.227 HKT [66215] LOG:  background worker "logical replication launcher" (PID 66225) exited with exit code 1
+2026-10-27 20:28:05.228 HKT [66219] LOG:  shutting down
+2026-10-27 20:28:05.228 HKT [66219] LOG:  checkpoint starting: shutdown immediate
+2026-10-27 20:28:05.270 HKT [66219] LOG:  checkpoint complete: wrote 453 buffers (2.8%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.015 s, sync=0.015 s, total=0.043 s; sync files=689, longest=0.001 s, average=0.001 s; distance=6977 kB, estimate=6977 kB; lsn=0/1E57870, redo lsn=0/1E57870
+2026-10-27 20:28:05.273 HKT [66215] LOG:  database system is shut down

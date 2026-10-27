@@ -1,0 +1,10 @@
+[
+  {
+    "before": "function authError(error,operation){const e=PokerCloud.databaseFailure(error,error?.status||400,'auth/'+operation,'POST');console.error('[Midnight Poker / Supabase Auth]',{operation,httpStatus:e.httpStatus,...e.supabase})}",
+    "after": "function authError(error,operation){return root.MidnightAuthFeedback.report(error,operation)}"
+  },
+  {
+    "before": "if(result.error){authError(result.error,signup?'signUp':'signIn');throw Error(signup?'註冊失敗，請檢查 Email、密碼及專案設定':'登入失敗，請檢查帳號、密碼或 Email 驗證狀態')}",
+    "after": "if(result.error)throw Error(authError(result.error,signup?'signUp':'signIn'));"
+  }
+]

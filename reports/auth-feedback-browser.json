@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "actualSupabaseRequests": 0,
+  "scope": "actual root and friend UI with official SDK; Auth requests intercepted locally",
+  "checks": [
+    {
+      "page": "/",
+      "case": "service unavailable",
+      "status": "passed"
+    },
+    {
+      "page": "/",
+      "case": "mail not authorized",
+      "status": "passed"
+    },
+    {
+      "page": "/",
+      "case": "mail limit",
+      "status": "passed"
+    },
+    {
+      "page": "/",
+      "case": "confirmation required success",
+      "status": "passed"
+    },
+    {
+      "page": "/online",
+      "case": "service unavailable",
+      "status": "passed"
+    },
+    {
+      "page": "/online",
+      "case": "mail not authorized",
+      "status": "passed"
+    },
+    {
+      "page": "/online",
+      "case": "mail limit",
+      "status": "passed"
+    },
+    {
+      "page": "/online",
+      "case": "confirmation required success",
+      "status": "passed"
+    }
+  ],
+  "failures": [],
+  "checksPassed": 8
+}

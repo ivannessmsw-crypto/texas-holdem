@@ -8,6 +8,7 @@
 
 - [部署與使用步驟](DEPLOY.md)
 - [實際測試報告](reports/ACCEPTANCE.md)
+- [註冊失敗及專案恢復紀錄](reports/AUTH-2026-10-27.md)
 - [後端與資料庫說明](server/README.md)
 - [訊息協定](server/PROTOCOL.md)
 
