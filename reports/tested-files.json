@@ -1,7 +1,7 @@
 {
   "purpose": "SHA-256 of tested runtime/config/test files; excludes reports and private environment",
   "files": {
-    "assets/online-config.js": "0c8680db66893b6fe2be9fb1d473c64cfed9277737ba4d801f4a16d109b42e98",
+    "assets/online-config.js": "75052116e4f30bd42758ee146569c718780ffe7f795c1ccfd6a3ab86dbc8ef8a",
     "assets/online-launch.js": "d3070802e413d7a58a0110510cc9ec66fcd21c1477e07ec73174f2a15b481988",
     "engine/poker-engine.cjs": "8954d0aefbc5f1d0d3a923663f15d6054eb1928db28e1db098cc03a6cfb0e316",
     "index.html": "268c9e646687611eb8225a2103070e61d893082e936744de34ad32f07e8afbda",
@@ -37,5 +37,6 @@
     "server/tests/rules.test.cjs": "3afe8a33abfa369dd681087660662c66897559d9ad2ac7acd6f518be7d754a04",
     "server/tests/run-postgres.cjs": "b859cd4f7066969c5277889ce674ea063706d0892723271d0e229bd210889b9c",
     "server/tests/supabase.test.cjs": "3b0aeed9aff98182925ab2cc4782c3e0d0e056671f1290b7fba3734481fefdcc"
-  }
+  },
+  "deploymentConfigNote": "2026-10-27: public backend origin updated after successful Render health/login-page checks; other accepted runtime hashes unchanged."
 }

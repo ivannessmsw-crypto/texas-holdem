@@ -1,3 +1,2 @@
-// Public origin only. Fill after backend deployment, e.g. https://your-service.onrender.com.
-// An empty URL uses the current origin if it serves /api/config.
-globalThis.MidnightOnlineConfig=Object.freeze({url:''});
+// Public backend origin; no secret keys.
+globalThis.MidnightOnlineConfig=Object.freeze({url:"https://texas-holdem-f8r6.onrender.com"});

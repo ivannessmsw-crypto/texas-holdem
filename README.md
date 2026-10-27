@@ -2,7 +2,9 @@
 
 原有單機遊戲保留在 `index.html`；新增可部署的 **2–3 人真人好友房**。好友房使用原有 Supabase 帳號、獨立線上籌碼及伺服器發牌／結算。
 
-**交付狀態：本機可運行、可部署；尚未公開部署，也未完成真實 Supabase 雙帳號／兩名真人的公開網路驗收。**
+**2026-10-27：Render 已上線，健康檢查與好友房登入頁已驗證；真實 Supabase 雙帳號及兩名真人公開對戰仍待驗收。**
+
+[開啟好友房](https://texas-holdem-f8r6.onrender.com/online) · [本次部署紀錄](reports/DEPLOYMENT-2026-10-27.md)
 
 - [部署與使用步驟](DEPLOY.md)
 - [實際測試報告](reports/ACCEPTANCE.md)
